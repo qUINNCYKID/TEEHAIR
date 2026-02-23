@@ -396,18 +396,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+import { firebaseConfig } from "./firebase-config.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBKe7Z-FDu0fRaqVW4ahkmzLCwM3oBL3a8",
-    authDomain: "teehair-f6550.firebaseapp.com",
-    projectId: "teehair-f6550",
-    storageBucket: "teehair-f6550.firebasestorage.app",
-    messagingSenderId: "483431568388",
-    appId: "1:483431568388:web:22ec79659ee3a12216d151",
-    measurementId: "G-3XQSR638F3"
-};
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
