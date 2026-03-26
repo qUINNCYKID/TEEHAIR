@@ -446,35 +446,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Send email to stylist
             try {
-                const stylistRes = await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
                     to_email: 'theeverydayenvy@gmail.com',
-                    from_name: booking.name,
                     client_name: booking.name,
                     client_email: booking.email,
                     client_phone: booking.phone,
                     services: booking.services,
                     total: booking.total
                 });
-                console.log('Stylist email sent:', stylistRes.status, stylistRes.text);
             } catch (err) {
-                alert('Stylist email error: ' + JSON.stringify(err));
                 console.error('Stylist email failed:', err);
             }
 
             // Send confirmation email to client
             try {
-                const clientRes = await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
                     to_email: booking.email,
-                    from_name: 'Theeverydayenvy',
                     client_name: booking.name,
                     client_email: booking.email,
                     client_phone: booking.phone,
                     services: booking.services,
                     total: booking.total
                 });
-                console.log('Client email sent:', clientRes.status, clientRes.text);
             } catch (err) {
-                alert('Client email error: ' + JSON.stringify(err));
                 console.error('Client email failed:', err);
             }
 
