@@ -5,6 +5,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -57,7 +58,7 @@
                         Care for Your <span class="text-primary">Natural Glow</span>
 </h1>
 <p class="max-w-lg text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-                                 I  do offer a range services to be tailored to your 
+                                 I offer a range services to be tailored to your 
                                  individual needs and unique style. 
                             </p>                 
 <div class="flex gap-4">
@@ -433,6 +434,38 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             try {
                 await addDoc(collection(db, "bookings"), booking);
+                // EmailJS integration (fixed)
+                if (window.emailjs && window.emailjs.init) {
+                    window.emailjs.init('4MelkX2bWAUFJeFWr');
+                }
+                // Send email to stylist
+                try {
+                    await window.emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                        to_email: 'theeverydayenvy@gmail.com',
+                        client_name: booking.name,
+                        client_email: booking.email,
+                        client_phone: booking.phone,
+                        services: booking.services,
+                        total: booking.total
+                    });
+                } catch (err) {
+                    alert('Failed to send email to stylist: ' + (err?.text || err?.message || err));
+                    console.error('Stylist email error:', err);
+                }
+                // Send email to client
+                try {
+                    await window.emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                        to_email: booking.email,
+                        client_name: booking.name,
+                        client_email: booking.email,
+                        client_phone: booking.phone,
+                        services: booking.services,
+                        total: booking.total
+                    });
+                } catch (err) {
+                    alert('Failed to send email to client: ' + (err?.text || err?.message || err));
+                    console.error('Client email error:', err);
+                }
                 alert("Thank you for your booking with @Theeverdayenvy! Total: $" + total);
                 bookingForm.reset();
                 // Reset UI
@@ -458,10 +491,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="col-span-1 md:col-span-2">
 <div class="flex items-center gap-4 text-white mb-6">
 <span class="material-symbols-outlined text-primary text-4xl">flare</span>
-<h2 class="text-xl font-bold">Cosmetology Pro</h2>
+<h2 class="text-xl font-bold">Theeverdayenvy</h2>
 </div>
 <p class="max-w-xs mb-6 text-slate-400 leading-relaxed">
-                        Dedicated to enhancing your natural beauty through advanced dermatological science and personalized aesthetic care.
+                         I am dedicated to help you enhance your style and beauty and looks.
                     </p>
 <div class="flex gap-4">
 
