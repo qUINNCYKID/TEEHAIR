@@ -5,7 +5,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -25,6 +24,11 @@
         }
     </script>
 <title>Cosmetology Pro - Booking</title>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init('4MelkX2bWAUFJeFWr');
+</script>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
 <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
@@ -95,7 +99,7 @@
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 <div id="service-list" class="contents">
     <div class="group relative overflow-hidden rounded-2xl aspect-[3/5] cursor-pointer service-item" data-service="Locs" data-price="100">
-        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Close up of glowing healthy skin after facial" style="background-image: url('hair-pics/Teehair/IMG_1082.JPG');">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Close up of glowing healthy skin after facial" style="background-image: url('Hair pics/Teehair/IMG_1082.JPG');">
 
         </div>
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -124,7 +128,7 @@
         </div>
     </div>
     <div class="group relative overflow-hidden rounded-2xl aspect-[3/5] cursor-pointer service-item" data-service="Natural Hair">
-        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Professional skin care products on shelf" style="background-image: url('hair-pics/Teehair/IMG_0211.JPG');" data-price="45"></div>
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Professional skin care products on shelf" style="background-image: url('Hair\ pics/Teehair/IMG_0211.JPG');" data-price="45"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         <p class="absolute bottom-4 left-4 text-white font-bold">Natural Hair</p>
         <div id="naturalHairOptions" class="hidden absolute left-0 right-0 bottom-0 bg-white bg-opacity-95 rounded-xl shadow-xl p-4 z-20 flex flex-col gap-2">
@@ -139,7 +143,7 @@
         </div>
     </div>
     <div id="braidsService" class="group relative overflow-hidden rounded-2xl aspect-[3/5] cursor-pointer service-item" data-service="Braids" data-price="45">
-        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Cosmetologist performing a skin consultation" style="background-image: url('hair-pics/Teehair/77B04750-144B-43B8-81DF-7F6B137D51CD.JPG');" data-price="45"></div>
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Cosmetologist performing a skin consultation" style="background-image: url('Hair\ pics/Teehair/77B04750-144B-43B8-81DF-7F6B137D51CD.JPG');" data-price="45"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         <p class="absolute bottom-4 left-4 text-white font-bold">Braids</p>
         <div id="braidsOptions" class="hidden absolute left-0 right-0 bottom-0 bg-white bg-opacity-95 rounded-xl shadow-xl p-4 z-20 flex flex-col gap-2">
@@ -158,31 +162,31 @@
         </div>
     </div>
     <div class="group relative overflow-hidden rounded-2xl aspect-[3/5] cursor-pointer service-item" data-service="Haircuts">
-        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('hair-pics/Teehair/IMG_0546.JPG');" data-price="10"></div>
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('Hair\ pics/Teehair/IMG_0546.JPG');" data-price="10"></div>
         
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         <p class="absolute bottom-4 left-4 text-white font-bold">Haircuts</p>
     </div>
     <div class="group relative overflow-hidden rounded-2xl aspect-[3/5] cursor-pointer service-item" data-service="Consultation">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('hair-pics/Teehair/IMG_1521.JPG');" data-price="0"></div>
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('Hair\ pics/Teehair/IMG_1521.JPG');" data-price="0"></div>
         
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         <p class="absolute bottom-4 left-4 text-white font-bold">Consultation</p>
     </div>
     <div class="group relative overflow-hidden rounded-2xl aspect-[3/5] cursor-pointer service-item" data-service="Wash service">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('hair-pics/Teehair/646091BE-5D04-4E62-A6FB-161569C65AC9.JPG');" data-price="15"></div>
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('Hair\ pics/Teehair/646091BE-5D04-4E62-A6FB-161569C65AC9.JPG');" data-price="15"></div>
         
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"> </a></div>
         <p class="absolute bottom-4 left-4 text-white font-bold">Wash service</p>
     </div>
     <div class="group relative overflow-hidden rounded-2xl aspect-[3/5] cursor-pointer service-item" data-service="Take down service">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('hair-pics/Teehair/Haircuts_in_action_at_the_salon.JPG');" data-price="25"></div>
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('Hair\ pics/Teehair/Haircuts_in_action_at_the_salon.JPG');" data-price="25"></div>
         
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         <p class="absolute bottom-4 left-4 text-white font-bold">Take down service</p>
     </div>
     <div class="group relative overflow-hidden rounded-2xl aspect-[3/5] cursor-pointer service-item" data-service="Deep conditioning">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('hair-pics/Teehair/Hair_care_and_deep_conditioning_session.JPG');" data-price="10"></div>
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Microneedling therapy session in progress" style="background-image: url('Hair\ pics/Teehair/Hair_care_and_deep_conditioning_session.JPG');" data-price="10"></div>
         
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         <p class="absolute bottom-4 left-4 text-white font-bold">Deep conditioning</p>
@@ -434,52 +438,49 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             try {
                 await addDoc(collection(db, "bookings"), booking);
-                // EmailJS integration (fixed)
-                if (window.emailjs && window.emailjs.init) {
-                    window.emailjs.init('4MelkX2bWAUFJeFWr');
-                }
-                // Send email to stylist
-                try {
-                    await window.emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
-                        to_email: 'theeverydayenvy@gmail.com',
-                        client_name: booking.name,
-                        client_email: booking.email,
-                        client_phone: booking.phone,
-                        services: booking.services,
-                        total: booking.total
-                    });
-                } catch (err) {
-                    alert('Failed to send email to stylist: ' + (err?.text || err?.message || err));
-                    console.error('Stylist email error:', err);
-                }
-                // Send email to client
-                try {
-                    await window.emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
-                        to_email: booking.email,
-                        client_name: booking.name,
-                        client_email: booking.email,
-                        client_phone: booking.phone,
-                        services: booking.services,
-                        total: booking.total
-                    });
-                } catch (err) {
-                    alert('Failed to send email to client: ' + (err?.text || err?.message || err));
-                    console.error('Client email error:', err);
-                }
-                alert("Thank you for your booking with @Theeverdayenvy! Total: $" + total);
-                bookingForm.reset();
-                // Reset UI
-                document.querySelectorAll('.service-item').forEach(el => el.classList.remove('ring-4', 'ring-primary'));
-                document.getElementById('priceTotal').textContent = '0';
             } catch (error) {
                 alert("Error saving booking: " + error.message);
                 console.error(error);
+                return;
             }
+
+            // Send email to stylist
+            try {
+                await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                    to_email: 'theeverydayenvy@gmail.com',
+                    client_name: booking.name,
+                    client_email: booking.email,
+                    client_phone: booking.phone,
+                    services: booking.services,
+                    total: booking.total
+                });
+            } catch (err) {
+                console.error('Stylist email failed:', err);
+            }
+
+            // Send confirmation email to client
+            try {
+                await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                    to_email: booking.email,
+                    client_name: booking.name,
+                    client_email: booking.email,
+                    client_phone: booking.phone,
+                    services: booking.services,
+                    total: booking.total
+                });
+            } catch (err) {
+                console.error('Client email failed:', err);
+            }
+
+            alert("Thank you for your booking with @Theeverdayenvy! Total: $" + booking.total + ". A confirmation email has been sent.");
+            bookingForm.reset();
+            // Reset UI
+            document.querySelectorAll('.service-item').forEach(el => el.classList.remove('ring-4', 'ring-primary'));
+            document.getElementById('priceTotal').textContent = '0';
         });
     }
 });
 </script>
-
 </script>
 </div>
 </div>
