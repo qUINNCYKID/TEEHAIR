@@ -418,7 +418,7 @@ async function sendBookingEmail(templateParams) {
         return { skipped: true };
     }
 
-    return window.emailjs.send('service_k8s2ctw', 'template_dsoj0bo', templateParams);
+    return window.emailjs.send('service_k8s2ctw', 'template_dsoj0bo', templateParams, '4MelkX2bWAUFJeFWr');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -455,35 +455,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Send email to stylist
-            try {
-                await sendBookingEmail({
-                    to_email: 'theeverydayenvy@gmail.com',
-                    client_name: booking.name,
-                    client_email: booking.email,
-                    client_phone: booking.phone,
-                    services: booking.services,
-                    total: booking.total
-                });
-            } catch (err) {
-                console.error('Stylist email failed:', err);
-            }
+            const baseTemplateParams = {
+                client_name: booking.name,
+                client_email: booking.email,
+                client_phone: booking.phone,
+                services: booking.services,
+                total: booking.total,
+                name: booking.name,
+                email: booking.email,
+                phone: booking.phone,
+                reply_to: booking.email,
+                message: 'Booking request for ' + booking.services + ' | Total: $' + booking.total
+            };
 
-            // Send confirmation email to client
-            try {
-                await sendBookingEmail({
+            const emailResults = await Promise.allSettled([
+                sendBookingEmail({
+                    ...baseTemplateParams,
+                    to_email: 'theeverydayenvy@gmail.com'
+                }),
+                sendBookingEmail({
+                    ...baseTemplateParams,
                     to_email: booking.email,
-                    client_name: booking.name,
-                    client_email: booking.email,
-                    client_phone: booking.phone,
-                    services: booking.services,
-                    total: booking.total
-                });
-            } catch (err) {
-                console.error('Client email failed:', err);
+                    reply_to: 'theeverydayenvy@gmail.com'
+                })
+            ]);
+
+            const stylistSent = emailResults[0].status === 'fulfilled';
+            const clientSent = emailResults[1].status === 'fulfilled';
+
+            if (!stylistSent) {
+                console.error('Stylist email failed:', emailResults[0].reason);
             }
 
-            alert("Thank you for your booking with @Theeverdayenvy! Total: $" + booking.total + ". A confirmation email has been sent.");
+            if (!clientSent) {
+                console.error('Client email failed:', emailResults[1].reason);
+            }
+
+            if (stylistSent && clientSent) {
+                alert("Thank you for your booking with @Theeverdayenvy! Total: $" + booking.total + ". Both emails were sent.");
+            } else {
+                alert("Booking saved, but one or more emails did not send. Check the browser console for the EmailJS error.");
+            }
             bookingForm.reset();
             // Reset UI
             document.querySelectorAll('.service-item').forEach(el => el.classList.remove('ring-4', 'ring-primary'));
