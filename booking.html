@@ -454,6 +454,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error(error);
                 return;
             }
+            const teebaseTemplateParams = {
+                client_name: booking.name,
+                client_email: booking.email,
+                client_phone: booking.phone,
 
             const baseTemplateParams = {
                 client_name: booking.name,
@@ -470,13 +474,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const emailResults = await Promise.allSettled([
                 sendBookingEmail({
-                    ...baseTemplateParams,
+                    ...teebaseTemplateParams,
                     to_email: 'theeverydayenvy@gmail.com'
                 }),
                 sendBookingEmail({
                     ...baseTemplateParams,
                     to_email: booking.email,
-                    reply_to: 'theeverydayenvy@gmail.com'
+                   
                 })
             ]);
 
