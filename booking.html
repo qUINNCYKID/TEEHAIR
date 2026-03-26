@@ -27,7 +27,9 @@
 <!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-  emailjs.init('4MelkX2bWAUFJeFWr');
+    if (window.emailjs) {
+        window.emailjs.init('4MelkX2bWAUFJeFWr');
+    }
 </script>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
@@ -410,6 +412,15 @@ import { getFirestore, addDoc, collection } from "https://www.gstatic.com/fireba
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+async function sendBookingEmail(templateParams) {
+    if (!window.emailjs) {
+        console.warn('EmailJS failed to load.');
+        return { skipped: true };
+    }
+
+    return window.emailjs.send('service_k8s2ctw', 'template_dsoj0bo', templateParams);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const bookingForm = document.getElementById('bookingForm');
     if (bookingForm) {
@@ -446,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Send email to stylist
             try {
-                await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                await sendBookingEmail({
                     to_email: 'theeverydayenvy@gmail.com',
                     client_name: booking.name,
                     client_email: booking.email,
@@ -460,7 +471,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Send confirmation email to client
             try {
-                await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                await sendBookingEmail({
                     to_email: booking.email,
                     client_name: booking.name,
                     client_email: booking.email,
