@@ -444,51 +444,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            if (!window.emailjs) {
-                alert("EmailJS did not load on this page.");
-                return;
-            }
-
-            let stylistEmailSent = false;
-            let clientEmailSent = false;
-
             // Send email to stylist
             try {
-                await window.emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
                     to_email: 'theeverydayenvy@gmail.com',
-                    reply_to: booking.email,
-                    from_name: booking.name,
                     client_name: booking.name,
                     client_email: booking.email,
                     client_phone: booking.phone,
                     services: booking.services,
                     total: booking.total
                 });
-                stylistEmailSent = true;
             } catch (err) {
-                alert('Stylist email failed: ' + (err?.text || err?.message || JSON.stringify(err)));
                 console.error('Stylist email failed:', err);
             }
 
             // Send confirmation email to client
             try {
-                await window.emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
+                await emailjs.send('service_k8s2ctw', 'template_dsoj0bo', {
                     to_email: booking.email,
-                    reply_to: 'theeverydayenvy@gmail.com',
-                    from_name: 'Theeverydayenvy',
                     client_name: booking.name,
                     client_email: booking.email,
                     client_phone: booking.phone,
                     services: booking.services,
                     total: booking.total
                 });
-                clientEmailSent = true;
             } catch (err) {
-                alert('Client email failed: ' + (err?.text || err?.message || JSON.stringify(err)));
                 console.error('Client email failed:', err);
             }
 
-            alert("Thank you for your booking with @Theeverdayenvy! Total: $" + booking.total + ". Stylist email: " + (stylistEmailSent ? 'sent' : 'failed') + ". Client email: " + (clientEmailSent ? 'sent' : 'failed') + ".");
+            alert("Thank you for your booking with @Theeverdayenvy! Total: $" + booking.total + ". A confirmation email has been sent.");
             bookingForm.reset();
             // Reset UI
             document.querySelectorAll('.service-item').forEach(el => el.classList.remove('ring-4', 'ring-primary'));
