@@ -423,30 +423,43 @@ async function sendBookingEmail(templateParams) {
 
 document.addEventListener('DOMContentLoaded', function() {
     const bookingForm = document.getElementById('bookingForm');
+
     if (bookingForm) {
         bookingForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+
             const formData = new FormData(bookingForm);
-            const name = formData.get('name').trim();
-            // Only allow letters and spaces, at least one character
+            const name = (formData.get('name') || '').trim();
+            const email = (formData.get('email') || '').trim();
+            const phone = (formData.get('phone') || '').trim();
+            const services = formData.get('services');
+            const total = formData.get('total');
+
             if (!/^[A-Za-z ]+$/.test(name)) {
                 alert('Please enter a valid name (letters and spaces only).');
                 return;
             }
-            const services = formData.get('services');
-            const total = formData.get('total');
+
             if (!services) {
                 alert('Please select at least one service.');
                 return;
             }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
             const booking = {
-                name: name,
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                services: services,
-                total: total,
+                name,
+                email,
+                phone,
+                services,
+                total,
                 createdAt: new Date().toISOString()
             };
+
             try {
                 await addDoc(collection(db, "bookings"), booking);
             } catch (error) {
@@ -454,10 +467,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error(error);
                 return;
             }
-            const teebaseTemplateParams = {
-                client_name: booking.name,
-                client_email: booking.email,
-                client_phone: booking.phone,
 
             const baseTemplateParams = {
                 client_name: booking.name,
@@ -474,13 +483,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const emailResults = await Promise.allSettled([
                 sendBookingEmail({
-                    ...teebaseTemplateParams,
+                    ...baseTemplateParams,
                     to_email: 'theeverydayenvy@gmail.com'
                 }),
                 sendBookingEmail({
                     ...baseTemplateParams,
                     to_email: booking.email,
-                   
+                    reply_to: 'theeverydayenvy@gmail.com'
                 })
             ]);
 
@@ -496,13 +505,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (stylistSent && clientSent) {
-                alert("Thank you for your booking with @Theeverdayenvy! Total: $" + booking.total + ". Both emails were sent.");
+                alert("Thank you for your booking with @Theeverydayenvy! Total: $" + booking.total + ". Both emails were sent.");
             } else {
                 alert("Booking saved, but one or more emails did not send. Check the browser console for the EmailJS error.");
             }
+
             bookingForm.reset();
-            // Reset UI
-            document.querySelectorAll('.service-item').forEach(el => el.classList.remove('ring-4', 'ring-primary'));
+
+            document.querySelectorAll('.service-item').forEach(el => {
+                el.classList.remove('ring-4', 'ring-primary');
+            });
+
             document.getElementById('priceTotal').textContent = '0';
         });
     }
